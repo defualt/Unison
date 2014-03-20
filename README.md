@@ -1,3 +1,17 @@
+### fork info
+
+Now, this module begins listening to the window.onresize with a method call to .initialize.  So, load the script, then call `Unison.initialize();`
+
+This was needed to allow the module to be extended in order to replace the onresize and debounce methods with those of the parent application.  How do do this:
+
+```
+Unison.initialize = function(){
+	appWindowService.onResize(Unison.update);
+};
+Unison.initialize();
+```
+
+
 Unison.js
 =========
 
