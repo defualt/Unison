@@ -80,7 +80,10 @@ Unison = (function() {
     }
   };
 
-  win.onresize = util.debounce(breakpoints.update, 100);
+  var initialize = function(){
+    win.onresize = util.debounce(breakpoints.update, 100);
+  };
+  
   win.onload = breakpoints.update;
   doc.addEventListener('DOMContentLoaded', function(){
     unisonReady = win.getComputedStyle(head, null).getPropertyValue('clear') !== 'none';
@@ -95,7 +98,8 @@ Unison = (function() {
     emit : events.emit,
     util : {
       debounce : util.debounce,
-      isObject : util.isObject
+      isObject : util.isObject,
+      intialize: initialize
     }
   };
 
