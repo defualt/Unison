@@ -5,13 +5,10 @@
   "authors": [
     "Dan Chilton <dan.chilton@gmail.com>"
   ],
-  "description": "Unifying named breakpoints across CSS, JS, and HTML",
+  "description": "Unifying named breakpoints across CSS, JS, and HTML.  This is forked by defualt@github to make the onresize overwritable.",
   "main": [
     "./js/unison.js",
-    "./js/unison.min.js",
-    "./css/_breakpoints.scss",
-    "./css/breakpoints.less",
-    "./css/breakpoints.styl"
+    "./css/_breakpoints.scss"
   ],
   "keywords": [
     "breakpoints",
