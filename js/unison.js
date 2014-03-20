@@ -70,6 +70,7 @@ Unison = (function() {
       return ( unisonReady ) ? (( util.isUndefined(callback) ) ? now : callback(now)) : null ;
     },
     update : function() {
+      console.log('UPDATE')
       breakpoints.now(function(bp) {
         if ( bp.name !== currentBP ) {
           events.emit(bp.name);
@@ -83,6 +84,7 @@ Unison = (function() {
   var initialize = function(){
     win.onresize = util.debounce(breakpoints.update, 100);
   };
+  // initialize();
   
   win.onload = breakpoints.update;
   doc.addEventListener('DOMContentLoaded', function(){
@@ -99,8 +101,10 @@ Unison = (function() {
     util : {
       debounce : util.debounce,
       isObject : util.isObject,
-      intialize: initialize
-    }
+    },
+    intialize: initialize,
+    breakpoints: breakpoints,
+    update: breakpoints.update
   };
 
 })();
