@@ -53,14 +53,16 @@ Unison = (function() {
       }
     }
   };
-
+  var makeNum = function(str){
+    return +(str.replace('px',''));
+  };
   var breakpoints = {
     all : function() {
       var BPs = {};
       var allBP = util.parseMQ(doc.querySelector('title')).split(',');
       for ( var i = 0; i < allBP.length; i++ ) {
         var mq = allBP[i].trim().split(' ');
-        BPs[mq[0]] = mq[1];
+        BPs[mq[0]] = makeNum(mq[1]);
       }
       return ( unisonReady ) ? BPs : null ;
     },
@@ -68,12 +70,11 @@ Unison = (function() {
       var nowBP = util.parseMQ(head).split(' ');
       var now = {
         name : nowBP[0],
-        width : nowBP[1]
+        width : makeNum(nowBP[1])
       };
       return ( unisonReady ) ? (( util.isUndefined(callback) ) ? now : callback(now)) : null ;
     },
     update : function() {
-      console.log('UPDATE')
       breakpoints.now(function(bp) {
         if ( bp.name !== currentBP ) {
           events.emit(bp.name);
@@ -87,9 +88,7 @@ Unison = (function() {
   var initialize = function(){
     win.onresize = util.debounce(breakpoints.update, 100);
   };
-  // initialize();
   var ref = win.onload;
-
   win.onload = (function(ref) {
       return function(element,attrs) {
           funcbreakpoints.update();
@@ -100,7 +99,6 @@ Unison = (function() {
 
 
   var init =  function(){
-    console.log('zxcv')
     unisonReady = win.getComputedStyle(head, null).getPropertyValue('clear') !== 'none';
   };
 
