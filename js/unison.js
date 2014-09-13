@@ -1,3 +1,6 @@
+
+
+
 Unison = (function() {
 
   'use strict';
@@ -85,11 +88,29 @@ Unison = (function() {
     win.onresize = util.debounce(breakpoints.update, 100);
   };
   // initialize();
-  
-  win.onload = breakpoints.update;
-  doc.addEventListener('DOMContentLoaded', function(){
+  var ref = win.onload;
+
+  win.onload = (function(ref) {
+      return function(element,attrs) {
+          funcbreakpoints.update();
+          return ref.apply(this, arguments);
+      };
+  })(ref);
+
+
+
+  var init =  function(){
+    console.log('zxcv')
     unisonReady = win.getComputedStyle(head, null).getPropertyValue('clear') !== 'none';
-  });
+  };
+
+  if (document.readyState == "complete" || document.readyState == "loaded") {
+       init()
+  } else {
+    doc.addEventListener('DOMContentLoaded', function(){
+      init();
+    });
+  }
 
   return {
     fetch : {
