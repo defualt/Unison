@@ -88,13 +88,13 @@ Unison = (function() {
   var initialize = function(){
     win.onresize = util.debounce(breakpoints.update, 100);
   };
-  var ref = win.onload;
-  win.onload = (function(ref) {
-      return function(element,attrs) {
-          funcbreakpoints.update();
-          return ref.apply(this, arguments);
-      };
-  })(ref);
+  // var ref = win.onload;
+  // win.onload = (function(ref) {
+  //     return function(element,attrs) {
+  //         breakpoints.update();
+  //         return ref.apply(this, arguments);
+  //     };
+  // })(ref);
 
 
 
